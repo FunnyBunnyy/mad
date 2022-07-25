@@ -1,0 +1,123 @@
+package com.example.program8;
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+public class MainActivity extends AppCompatActivity {
+    EditText phoneNumberEditText;
+    Button clearBtn,callBtn,saveBtn;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        phoneNumberEditText=findViewById(R.id.txt_phonenumber);
+        Button btnOne=(Button)findViewById(R.id.btn_one);
+        btnOne.setOnClickListener(new View.OnClickListener() {
+                                      @Override
+                                      public void onClick(View view) {
+                                          phoneNumberEditText.append("1");
+                                      }
+                                  });
+        Button btnTwo=(Button)findViewById(R.id.btn_two);
+        btnTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                phoneNumberEditText.append("2");
+            }
+        });
+        Button btnThree=(Button)findViewById(R.id.btn_three);
+        btnThree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                phoneNumberEditText.append("3");
+            }
+        });
+        Button btnFour=(Button)findViewById(R.id.btn_four);
+        btnFour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                phoneNumberEditText.append("4");
+            }
+        });
+        Button btnFive=(Button)findViewById(R.id.btn_five);
+        btnFive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                phoneNumberEditText.append("5");
+            }
+        });
+        Button btnSix=(Button)findViewById(R.id.btn_six);
+        btnSix.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                phoneNumberEditText.append("6");
+            }
+        });
+        Button btnSeven=(Button)findViewById(R.id.btn_seven);
+        btnSeven.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                phoneNumberEditText.append("7");
+            }
+        });
+        Button btnEight=(Button)findViewById(R.id.btn_eight);
+        btnEight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                phoneNumberEditText.append("8");
+            }
+        });
+        Button btnNine=(Button)findViewById(R.id.btn_nine);
+        btnNine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                phoneNumberEditText.append("9");
+            }
+        });
+        Button btnZero=(Button)findViewById(R.id.btn_zero);
+        btnZero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                phoneNumberEditText.append("0");
+            }
+        });
+                callBtn = findViewById(R.id.btn_call);
+        saveBtn=findViewById(R.id.btn_save);
+        clearBtn=findViewById(R.id.btn_delete);
+        clearBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                phoneNumberEditText.setText("");
+            }
+        });
+        callBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phoneNumber=phoneNumberEditText.getText().toString();
+                Intent intent=new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:"+phoneNumber));
+                startActivity(intent);
+            }
+        });
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phoneNumber=phoneNumberEditText.getText().toString();
+                Intent intent=new Intent(Intent.ACTION_INSERT);
+                intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
+                intent.putExtra(ContactsContract.Intents.Insert.PHONE,phoneNumber);
+                startActivity(intent);
+            }
+        });
+    }
+    public void inputNumber(View V){
+        Button btn=(Button)V;
+        String digit=btn.getText().toString();
+        String phoneNumber=phoneNumberEditText.getText().toString();
+        phoneNumberEditText.setText(phoneNumber +digit);
+    }
+}
